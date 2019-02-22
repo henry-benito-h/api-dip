@@ -1,3 +1,4 @@
 host: https://api.schoology.com
-rootPath: /api
-authentication:
+root_path: /v1
+consumer_key: b06382cb37b1cf75ba78506f891f013405c621433
+consumer_secret: c00d645943f0264d336e91c9cebcf621
