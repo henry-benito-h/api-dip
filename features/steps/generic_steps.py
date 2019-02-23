@@ -8,7 +8,7 @@ use_step_matcher("re")
 
 @given(u'I have this endpoint "(?P<endpoint>.*)"')
 def step_impl(context, endpoint):
-    pass
+    context.endpoint = endpoint
 
 
 @given(u'I have a record already created')
