@@ -4,8 +4,8 @@ Feature: Create a Course
   As a teacher I want to create a Course so that I am enable to administrate the course
 
   Scenario: Create a Matematic course with nivel 3
-    Given I have this endpoint "/courses"
-    And I have the data below
+    Given I have the next endpoint "/courses"
+    And I have the body payload below
     """
     {
         "title": "English Writing",
@@ -15,6 +15,7 @@ Feature: Create a Course
     }
     """
     When I do an api POST request
-    Then I should have a new course with name equals to 'course_tes1'
+    Then I should have 400 as status code
+    And I should have a new course with name equals to 'course_tes1'
 
 
