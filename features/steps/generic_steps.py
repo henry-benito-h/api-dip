@@ -23,10 +23,9 @@ def step_impl(context, action):
 @when(u'that request has (?P<data_type>.*)?values in data')
 def step_impl(context, data_type):
     context.text = json.loads(context.text)
-    request = context.request.call(context.action, context.endpoint)
-    context.request_body = request
-    context.request_code = request.status_code
-    print('status from groups is', request.status_code)
+    result = context.request.call(context.action, context.endpoint)
+    context.request_body = result.json()
+    context.request_code = result.status_code
 
 
 @then(u'I should have (?P<expected_code>[1-5]\d{2}) as status code')
@@ -37,5 +36,5 @@ def step_impl(context, expected_code):
 @then(u'for response body I should get a record info')
 def step_impl(context):
     context.expected_body = json.loads(context.text)
-    # expect(context.expected_body).to_equal(context.request_body)
-    pass
+    expect(context.expected_body).to_equal(context.request_body)
+
