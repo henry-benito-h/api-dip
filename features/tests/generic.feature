@@ -3,9 +3,10 @@ Feature: #Enter feature name here
   # Enter feature description here
 
   Scenario: Test an action
-    Given I have this endpoint "/Something/Else"
+#    Given I am authentication on schoology with username pepe and password pepepass
+    Given I have this endpoint "/users"
     And I have a record already created
-    When I do a POST request
+    When I do a GET request
     And that request has valid values in data
     """
     {

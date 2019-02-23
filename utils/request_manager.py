@@ -15,7 +15,7 @@ class Request:
 
     def call(self, method, end_point, **kwargs):
         url = f'{self.base_url}{end_point}'
-        return requests.request(method, url, **kwargs)
+        return requests.request(method, url, auth=self.auth, headers=self.headers, **kwargs)
 
     def get(self, end_point, **kwargs):
         return self.call('get', end_point, **kwargs)

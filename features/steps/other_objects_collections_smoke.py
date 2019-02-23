@@ -14,5 +14,5 @@ def step_impl(context):
     """ Using request call, need to add the method
     (GET, POST, PU, PATCH, DELETE) and the endpoint"""
     r = context.request.call('GET', '/groups')
-    print('status from groups is', r.status_code)
+    print('Status from groups is: ', r.status_code)
     expect(r.status_code).to_equal(200)
