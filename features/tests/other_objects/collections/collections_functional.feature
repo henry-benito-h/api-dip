@@ -19,3 +19,24 @@ Feature: Read, Update and Delete operation over Resource Collections
     When I do an api GET request
     Then I should have 200 as status code
     And I should see the collection created matching with the one created
+
+  @functional, @other_objects
+  Scenario: Update an existing resource collection
+    Given I have the next endpoint "/collections/:id"
+    And I have the body payload below
+    """
+    {
+      "title": "Functional_Collection_Updated"
+    }
+    """
+    When I do an api PUT request
+    Then I should have 204 as status code
+
+  @functional, @other_objects
+  Scenario: Delete an existing resource collection
+    Given I have the next endpoint "/collections/:id"
+    When I do an api DELETE request
+    Then I should have 204 as status code
+    And I have the next endpoint "/collections/:id"
+    When I do an api GET request
+    Then I should have 403 as status code
