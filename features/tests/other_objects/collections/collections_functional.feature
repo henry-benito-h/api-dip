@@ -40,3 +40,9 @@ Feature: Read, Update and Delete operation over Resource Collections
     And I have the next endpoint "/collections/:id"
     When I do an api GET request
     Then I should have 403 as status code
+
+  @functional, @other_objects, @negative
+  Scenario: Cannot read a non existing resource collection
+    Given I have the next endpoint "/collections/1111111"
+    When I do an api GET request
+    Then I should have 403 as status code
