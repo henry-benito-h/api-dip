@@ -3,20 +3,23 @@
 Feature: Messages
   # Enter feature description here
 
+  Background:
+    Given I am authenticated as "instructor henry"
+
   @smoke
-  Scenario: Get a list of messages
+  Scenario: Get a list of messages from inbox
     Given I have the next endpoint "/messages/inbox"
     When I do an api GET request
     Then I should have 200 as status code
 
   @smoke
-  Scenario: Get a list of messages
+  Scenario: Get a list of messages from sent
     Given I have the next endpoint "/messages/sent"
     When I do an api GET request
     Then I should have 200 as status code
 
   @smoke
-  Scenario: Get a list of messages
+  Scenario: No access to messages endpoint
     Given I have the next endpoint "/messages"
     When I do an api GET request
     Then I should have 405 as status code

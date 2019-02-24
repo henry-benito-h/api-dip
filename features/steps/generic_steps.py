@@ -1,5 +1,5 @@
 import json
-from compare import expect
+from compare import expect, ensure
 from behave import *
 
 
@@ -32,20 +32,24 @@ def step_impl(context, status_code):
 
 @then("response body should match with (?P<content>.*)?content")
 def step_impl(context, content):
+    content = content.rstrip()
     if content == "empty" and context.text:
-        expect(True).to_equal(False)
+        ensure(False, True, "If we are waiting 'empty content' should not exist a text below the step")
 
     if context.text is None:
-        current = context.response.text
-        expect("").to_equal(current)
+        expect("").to_equal(context.response.text)
 
     if context.text:
-        current = context.response.json()
-        if content:
-            current = current[content.rstrip()][0]
-        expected = json.loads(context.text)
-        for key in expected:
-            expect(expected[key]).to_equal(current[key])
+        try:
+            current = context.response.json()
+            if content:
+                current = current[content][0]
+            expected = json.loads(context.text)
+
+            for key in expected:
+                expect(expected[key]).to_equal(current[key])
+        except KeyError:
+            ensure(False, True, "This key '{}' does not exist for both dicts".format(key))
 
 
 @step("I have a record already created with this content")
@@ -53,3 +57,12 @@ def step_impl(context):
     params = context.req_params if hasattr(context, 'req_params') else None
     request_response = context.request.call('POST', context.endpoint, data=context.text, params=params)
     context.id = request_response.json()["id"]
+
+
+@given('I am authenticated as "(?P<credentials>.*)"')
+def step_impl(context, credentials):
+    try:
+        context.request.update_credentials(credentials)
+    except KeyError:
+        ensure(False, True, "Wrong credential value. Key '{}' does not exist".format(credentials))
+
