@@ -28,3 +28,28 @@ def step_impl(context, method):
 @then(u'I should have (?P<status_code>.*) as status code')
 def step_impl(context, status_code):
     expect(context.response.status_code).to_equal(int(status_code))
+
+
+@then("response body should match with (?P<content>.*)?content")
+def step_impl(context, content):
+    if content == "empty" and context.text:
+        expect(True).to_equal(False)
+
+    if context.text is None:
+        current = context.response.text
+        expect("").to_equal(current)
+
+    if context.text:
+        current = context.response.json()
+        if content:
+            current = current[content.rstrip()][0]
+        expected = json.loads(context.text)
+        for key in expected:
+            expect(expected[key]).to_equal(current[key])
+
+
+@step("I have a record already created with this content")
+def step_impl(context):
+    params = context.req_params if hasattr(context, 'req_params') else None
+    request_response = context.request.call('POST', context.endpoint, data=context.text, params=params)
+    context.id = request_response.json()["id"]

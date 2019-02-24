@@ -13,3 +13,11 @@ Feature: Generic steps on a basic scenario
     """
     When I do an api GET request
     Then I should have 403 as status code
+    Then response body should match with content
+    """
+    {
+      "message": "Requires ",
+      "documentation_url": "https://developer.github.com/v3/users/#get-the-authenticated-user"
+    }
+    """
+
