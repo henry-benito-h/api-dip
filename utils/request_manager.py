@@ -5,6 +5,7 @@ from requests_oauthlib import OAuth1
 class Request:
     """Class client for schoology api service"""
     def __init__(self, config):
+        self.config = config
         self.base_url = f'{config["host"]}{config["root_path"]}'
         self.auth = OAuth1(config['consumer_key'], config['consumer_secret'])
         self.headers = {
@@ -31,3 +32,9 @@ class Request:
 
     def delete(self, end_point, **kwargs):
         return self.call('delete', end_point, **kwargs)
+
+    def update_credentials(self, credentials):
+        self.auth = OAuth1(self.config[credentials]['consumer_key'], self.config[credentials]['consumer_secret'])
+
+    def reset_credentials(self):
+        self.auth = OAuth1(self.config['consumer_key'], self.config['consumer_secret'])
