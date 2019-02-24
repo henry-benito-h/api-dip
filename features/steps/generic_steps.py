@@ -8,6 +8,8 @@ use_step_matcher("re")
 
 @given(u'I have the next endpoint "(?P<endpoint>.*)"')
 def step_impl(context, endpoint):
+    if ':id' in endpoint and hasattr(context, 'id'):
+        endpoint = endpoint.replace(':id', str(context.id))
     context.endpoint = endpoint
 
 
