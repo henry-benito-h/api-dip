@@ -37,7 +37,7 @@ Feature: Create operation for event in a group
 
  @functional, @positive
   Scenario: Get all events for a group
-    Given I have the next endpoint "/groups/:id/event"
+    Given I have the next endpoint "/groups/:id/events"
     When I do an api GET request
     Then I should have 200 as status code
     And I should see the list of events on the group
