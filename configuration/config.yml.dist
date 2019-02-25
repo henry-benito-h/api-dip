@@ -3,6 +3,6 @@ authentication:
   root_path: /v1
   consumer_key: <comsumer_key_here>
   consumer_secret: <consumer_secret_here>
-  instructor henry:
-    consumer_key: 591098e53e3172e90f414d9171185d1c05c70889a
-    consumer_secret: 08544a92832b43716169211eb4149d92
+  instructor:
+    consumer_key: <comsumer_key_here>
+    consumer_secret: <consumer_secret_here>

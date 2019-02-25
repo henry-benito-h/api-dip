@@ -2,6 +2,7 @@ import json
 from compare import expect, ensure
 from behave import *
 
+from utils.param_transformation import replace_parameters
 
 use_step_matcher("re")
 
@@ -15,7 +16,8 @@ def step_impl(context, endpoint):
 
 @given(u'I have the body payload below')
 def step_impl(context):
-    context.req_body = json.dumps(json.loads(context.text))
+    new_context_text = replace_parameters(context, context.text)
+    context.req_body = json.dumps(json.loads(new_context_text))
 
 
 @when(u'I do an api (?P<method>GET|POST|PUT|DELETE) request')
@@ -40,12 +42,12 @@ def step_impl(context, content):
         expect("").to_equal(context.response.text)
 
     if context.text:
+        new_context_text = replace_parameters(context, context.text)
         try:
             current = context.response.json()
             if content:
                 current = current[content][0]
-            expected = json.loads(context.text)
-
+            expected = json.loads(new_context_text)
             for key in expected:
                 expect(expected[key]).to_equal(current[key])
         except KeyError:
@@ -54,8 +56,9 @@ def step_impl(context, content):
 
 @step("I have a record already created with this content")
 def step_impl(context):
+    new_context_text = replace_parameters(context, context.text)
     params = context.req_params if hasattr(context, 'req_params') else None
-    request_response = context.request.call('POST', context.endpoint, data=context.text, params=params)
+    request_response = context.request.call('POST', context.endpoint, data=new_context_text, params=params)
     context.id = request_response.json()["id"]
 
 
@@ -63,5 +66,7 @@ def step_impl(context):
 def step_impl(context, credentials):
     try:
         context.request.update_credentials(credentials)
+        endpoint = "/app-user-info"
+        context.my_id = context.request.call('GET', endpoint, data=None, params=None).json()["api_uid"]
     except KeyError:
         ensure(False, True, "Wrong credential value. Key '{}' does not exist".format(credentials))
