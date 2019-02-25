@@ -12,5 +12,5 @@ Feature: Create operations on Resource Collections
     }
     """
     When I do an api POST request
-    Then I should have 201 as status code
+    Then I should have 400 as status code
     And The response body should have an id
