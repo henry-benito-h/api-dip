@@ -3,14 +3,14 @@
 Feature: Create a Course
   As a teacher I want to create a Course so that I am enable to administrate the course
 
-
-  Scenario: Create a Matematic course with nivel 3
+  @acceptance @positive
+  Scenario: Create a course with required inputs
     Given I have the next endpoint "/courses"
     And I have the body payload below
     """
     {
-        "title": "English Reading103",
-        "course_code": "NREe103",
+        "title": "English Reading10123",
+        "course_code": "NREe1147",
         "department": "English",
         "description": "Essay Reading"
     }
