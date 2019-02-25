@@ -1,5 +1,5 @@
 # Created by Jafeth Garcia at 2/23/2019
-Feature: Create operation for resource over a Collection
+Feature: Create operation for resource over a new Collection
 
   Background:
     Given I have the next endpoint "/collections"

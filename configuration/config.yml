@@ -1,5 +1,8 @@
 authentication:
   host: https://api.schoology.com
   root_path: /v1
-  consumer_key: bfb0ab5c33ef981b4fed1a4bd40c77b905c62cc71
-  consumer_secret: 1c17d84f579f975c5f1e0636f2d8fce8
+  consumer_key: <comsumer_key_here>
+  consumer_secret: <consumer_secret_here>
+  instructor henry:
+    consumer_key: 591098e53e3172e90f414d9171185d1c05c70889a
+    consumer_secret: 08544a92832b43716169211eb4149d92

@@ -15,3 +15,9 @@ def step_impl(context):
 def step_impl(context):
     result = context.response.json()
     expect(result).to_be_truthy()
+
+
+@then(u'The response body should have the text (?P<message>.*)')
+def step_impl(context, message):
+    result = context.response.text
+    expect(result).to_equal(message)
