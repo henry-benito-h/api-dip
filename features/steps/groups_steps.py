@@ -16,9 +16,8 @@ def step_impl(context):
     expect(result['title']).to_equal(body['title'])
     expect(result['id']).to_equal(context.id)
 
+
 @then(u'I should see the list of events on the group')
 def step_impl(context):
     result = context.response.json()
     expect(result).to_be_truthy()
-
-

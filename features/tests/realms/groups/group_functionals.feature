@@ -38,7 +38,6 @@ Feature: Create operation for group
     When I do an api PUT request
     Then I should have 204 as status code
 
-
   @functional, @positive
   Scenario: Delete an existing group
     Given I have the next endpoint "/groups/:id"
@@ -47,7 +46,6 @@ Feature: Create operation for group
     And I have the next endpoint "/groups/:id"
     When I do an api GET request
     Then I should have 403 as status code
-
 
   @functional, @negative
   Scenario: Cannot read a non existing group

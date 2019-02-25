@@ -41,5 +41,3 @@ Feature: Create operation for event in a group
     When I do an api GET request
     Then I should have 200 as status code
     And I should see the list of events on the group
-
-

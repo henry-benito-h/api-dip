@@ -18,6 +18,3 @@ Feature: Create a Course
     When I do an api POST request
     Then I should have 201 as status code
     And I should have a new course with name equals to 'course_tes1'
-
-
-

@@ -65,4 +65,3 @@ def step_impl(context, credentials):
         context.request.update_credentials(credentials)
     except KeyError:
         ensure(False, True, "Wrong credential value. Key '{}' does not exist".format(credentials))
-

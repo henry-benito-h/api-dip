@@ -52,6 +52,3 @@
       And I have the next endpoint "/groups/1984940728/:id"
       When I do an api GET request
       Then I should have 403 as status code
-
-
-

@@ -24,7 +24,6 @@ Feature: Messages
     When I do an api GET request
     Then I should have 405 as status code
 
-
   @acceptance
   Scenario: Get a list of messages
     Given I have the next endpoint "/messages/inbox"

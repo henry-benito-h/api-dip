@@ -14,4 +14,3 @@ Feature: Generic steps on a basic scenario
     """
     When I do an api GET request
     Then I should have 200 as status code
-

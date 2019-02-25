@@ -17,4 +17,3 @@ Feature: Try to create a album with invalid inputs
     When I do an api POST request
     Then I should have 400 as status code
     And I should not be enable to create a new album because the required fields empty
-

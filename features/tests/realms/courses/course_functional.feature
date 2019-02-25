@@ -1,8 +1,8 @@
 #Author : Naira Romero
 Feature:  Update, read and delete courses
   Background:
-   Given I have the next endpoint "/courses"
-   And I have the body payload below
+    Given I have the next endpoint "/courses"
+    And I have the body payload below
     """
     {
         "title": "Literature 119",
@@ -11,12 +11,12 @@ Feature:  Update, read and delete courses
         "description": "Essay Reading"
     }
     """
-   When I do an api POST request
-   Then I should have 201 as status code
-   And I save the id of the course
+    When I do an api POST request
+    Then I should have 201 as status code
+    And I save the id of the course
 
-    @functional, @positive
-   Scenario: Update the information of a course already created
+  @functional, @positive
+  Scenario: Update the information of a course already created
     Given I have the next endpoint "/courses/:id"
     And I have the body payload below
      """
@@ -31,14 +31,14 @@ Feature:  Update, read and delete courses
     When I do an api PUT request
     Then I should have 204 as status code
 
-    @functional, @positive
-   Scenario: Delete an existing course
-     Given I have the next endpoint "/courses/:id"
-     When I do an api DELETE request
-     Then I should have 204 as status code
+  @functional, @positive
+  Scenario: Delete an existing course
+    Given I have the next endpoint "/courses/:id"
+    When I do an api DELETE request
+    Then I should have 204 as status code
 
-   @functional, @positive
-   Scenario: Get the courses and their related information of an specific school
-     Given I have the next endpoint "/courses"
-     When I do an api GET request
-     Then I should have 200 as status code
+  @functional, @positive
+  Scenario: Get the courses and their related information of an specific school
+    Given I have the next endpoint "/courses"
+    When I do an api GET request
+    Then I should have 200 as status code

@@ -1,5 +1,5 @@
 Feature: Read a event
-@functional, @negative
+  @functional, @negative
   Scenario: Cannot create a new event with missing group id
     Given I have the next endpoint "/groups/1111111/events"
     And I have the body payload below
@@ -15,4 +15,3 @@ Feature: Read a event
     """
     When I do an api POST request
     Then I should have 403 as status code
-
