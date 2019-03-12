@@ -11,13 +11,6 @@ def step_impl(context):
     context.id = context.response.json()['id']
 
 
-@then(u'The response body should have an id')
-def step_impl(context):
-    result = context.response.json()
-    expect(result).to_be_truthy()
-    expect(result['id']).to_be_truthy()
-
-
 @then(u'I should see the collection created matching with the one created')
 def step_impl(context):
     body = json.loads(context.req_body)

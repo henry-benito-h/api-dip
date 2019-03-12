@@ -1,6 +1,10 @@
 authentication:
   host: https://api.schoology.com
-  root_path: /v1
+  root_path: /services/v5/
+  headers:
+    accept: application/json
+    Content-Type: application/json
+    X-TrackerToken: cffede56087bb0774ab5bea0019b5753
   consumer_key: <comsumer_key_here>
   consumer_secret: <consumer_secret_here>
   instructor:

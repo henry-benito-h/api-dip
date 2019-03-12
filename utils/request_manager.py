@@ -3,15 +3,15 @@ from requests_oauthlib import OAuth1
 
 
 class Request:
-    """Class client for schoology api service"""
+    """Class client for api service"""
     def __init__(self, config):
         self.config = config
+        self.config_headers = config["headers"]
         self.base_url = f'{config["host"]}{config["root_path"]}'
-        self.auth = OAuth1(config['consumer_key'], config['consumer_secret'])
+        self.auth = None;
         self.headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Host': 'api.schoology.com'
+            'X-TrackerToken': None,
+            'Content-Type': f'{self.config_headers["Content-Type"]}'
         }
 
     def call(self, method, end_point, **kwargs):
@@ -34,7 +34,8 @@ class Request:
         return self.call('delete', end_point, **kwargs)
 
     def update_credentials(self, credentials):
-        self.auth = OAuth1(self.config[credentials]['consumer_key'], self.config[credentials]['consumer_secret'])
+        # self.auth = OAuth1(self.config[credentials]['consumer_key'], self.config[credentials]['consumer_secret'])
+        self.headers['X-TrackerToken'] = f'{self.config["roles"][credentials]}';
 
     def reset_credentials(self):
-        self.auth = OAuth1(self.config['consumer_key'], self.config['consumer_secret'])
+        self.headers['X-TrackerToken'] = None;

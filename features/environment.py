@@ -8,7 +8,7 @@ config = yaml.load(open('configuration/config.yml'))
 
 def before_all(context):
     context.config = config
-    context.request = Request(config['authentication'])
+    context.request = Request(config['root'])
 
 
 def after_feature(context, feature):

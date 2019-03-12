@@ -1,0 +1,8 @@
+root:
+  host: https://www.pivotaltracker.com
+  root_path: /services/v5/
+  headers:
+    accept: application/json
+    Content-Type: application/json
+  roles:
+    admin: cffede56087bb0774ab5bea0019b5753

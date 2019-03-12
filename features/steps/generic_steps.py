@@ -29,7 +29,7 @@ def step_impl(context, method):
 
 @then(u'I should have (?P<status_code>.*) as status code')
 def step_impl(context, status_code):
-    expect(context.response.status_code).to_equal(int(status_code))
+    expect(int(status_code)).to_equal(context.response.status_code)
 
 
 @then("response body should match with (?P<content>.*)?content")
@@ -66,7 +66,24 @@ def step_impl(context):
 def step_impl(context, credentials):
     try:
         context.request.update_credentials(credentials)
-        endpoint = "/app-user-info"
-        context.my_id = context.request.call('GET', endpoint, data=None, params=None).json()["api_uid"]
+        endpoint = "me?fields=accounts(id)"
+        context.my_id = context.request.call('GET', endpoint, data=None, params=None).json()["accounts"][0]["id"]
     except KeyError:
         ensure(False, True, "Wrong credential value. Key '{}' does not exist".format(credentials))
+
+
+@then(u'The response body should have an id')
+def step_impl(context):
+    result = context.response.json()
+    expect(result).to_be_truthy()
+    expect(result['id']).to_be_truthy()
+
+
+@step("I remove all projects from dashboard")
+def step_impl(context):
+    all_projects = context.request.call('GET', 'projects');
+    all_projects = all_projects.json();
+    for project in all_projects:
+        print(project['id'])
+        all_projects = context.request.call('DELETE', f"projects/{project['id']}");
+    print('qwe')
