@@ -3,6 +3,7 @@ from utils.request_manager import Request
 
 
 global config
+
 config = yaml.load(open('configuration/config.yml'))
 
 
